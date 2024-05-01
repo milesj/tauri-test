@@ -2,12 +2,12 @@
 import * as dialog from '@tauri-apps/api/dialog';
 // import * as fs from '@tauri-apps/api/fs';
 import * as path from '@tauri-apps/api/path';
-import { inject, ref } from 'vue';
-import { CTX_REPOSITORY } from '../context';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useRepository } from '#app/stores/repository';
 
 const router = useRouter();
-const repository = inject(CTX_REPOSITORY)!;
+const repository = useRepository();
 const error = ref<string | null>(null);
 
 async function browse() {
