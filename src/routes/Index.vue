@@ -29,6 +29,7 @@ async function browse() {
 		? '.'
 		: selectedDir.replace(homeDir, '');
 
+	// TODO fix this check!
 	// if (!(await fs.exists(`${selectedDir}/.git`, { dir: fs.Dir.Home }))) {
 	// 	throw new Error('Directory must be a Git repository (.git not found)');
 	// }
