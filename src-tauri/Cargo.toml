@@ -13,11 +13,14 @@ tauri-build = { version = "1", features = [] }
 [dependencies]
 async-trait = "0.1.80"
 tauri = { version = "1", features = [
+	"path-all",
+	"dialog-open",
 	"fs-all",
 	"config-json5",
 	"shell-open",
 	"tracing",
 ] }
+tauri-plugin-persisted-scope = "0"
 multilink = { version = "1.0.1", features = ["http-server"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"

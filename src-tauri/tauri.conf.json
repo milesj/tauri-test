@@ -12,7 +12,14 @@
   "tauri": {
     "allowlist": {
       "all": false,
+      "dialog": {
+        "open": true
+      },
       "fs": {
+        "all": true,
+        "scope": ["$HOME/**", "$HOME/*", "$HOME"]
+      },
+      "path": {
         "all": true
       },
       "shell": {
@@ -23,8 +30,8 @@
     "windows": [
       {
         "title": "tauri-app",
-        "width": 800,
-        "height": 600
+        "width": 1024,
+        "height": 768
       }
     ],
     "security": {
