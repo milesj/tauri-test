@@ -1,3 +1,5 @@
 <template>
-	<h1>Dashboard</h1>
+	<ProjectsLayout>
+		<h1>Dashboard</h1>
+	</ProjectsLayout>
 </template>

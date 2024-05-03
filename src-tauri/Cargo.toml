@@ -13,17 +13,21 @@ tauri-build = { version = "1", features = [] }
 [dependencies]
 async-trait = "0.1.80"
 tauri = { version = "1", features = [
-	"path-all",
+	"config-json5",
 	"dialog-open",
 	"fs-all",
-	"config-json5",
+	"path-all",
 	"shell-open",
 	"tracing",
 ] }
 tauri-plugin-persisted-scope = "0"
 multilink = { version = "1.0.1", features = ["http-server"] }
+nodejs_package_json = { version = "0.2.0", features = ["serialize"] }
+nodejs_package_managers = "0.1.1"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+serde_yaml = "0"
+wax = "0.6.0"
 
 [features]
 # This feature is used for production builds or when a dev server is not specified, DO NOT REMOVE!!

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import * as dialog from '@tauri-apps/api/dialog';
-// import * as fs from '@tauri-apps/api/fs';
+import * as fs from '@tauri-apps/api/fs';
 import * as path from '@tauri-apps/api/path';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -8,7 +8,7 @@ import { useRepository } from '#app/stores/repository';
 
 const router = useRouter();
 const repository = useRepository();
-const error = ref<string | null>(null);
+const error = ref<Error | string | null>(null);
 
 async function browse() {
 	const homeDir = await path.homeDir(); // Has a trailing slash
@@ -22,27 +22,17 @@ async function browse() {
 		throw new Error('Please open a directory to continue');
 	}
 
-	// We can't use absolute paths when checking for existence,
-	// so update the path to be relative from the home directory
-	// @see https://tauri.app/v1/api/js/fs#security
-	const dir = selectedDir === homeDir || homeDir.startsWith(selectedDir)
-		? '.'
-		: selectedDir.replace(homeDir, '');
+	if (!(await fs.exists(`${selectedDir}/.git`, { dir: fs.Dir.Home }))) {
+		throw new Error('Directory must be a Git repository (.git not found)');
+	}
 
-	// TODO fix this check!
-	// if (!(await fs.exists(`${selectedDir}/.git`, { dir: fs.Dir.Home }))) {
-	// 	throw new Error('Directory must be a Git repository (.git not found)');
-	// }
-
-	console.log(selectedDir, dir);
-
-	repository.setPath(dir);
+	repository.setPath(selectedDir);
 	router.push('/dashboard');
 }
 
 function onBrowse() {
 	browse().catch((cause) => {
-		error.value = String(cause);
+		error.value = cause.message;
 	});
 }
 </script>
@@ -54,7 +44,7 @@ function onBrowse() {
 
 			<Button @click="onBrowse">Browse</Button>
 
-			<Message v-if="error" :closable="false" class="mt-4" severity="error">{{ error }}</Message>
+			<Failure v-if="error" class="mt-4" :error="error" />
 		</div>
 	</div>
 </template>
