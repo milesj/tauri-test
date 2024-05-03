@@ -5,6 +5,7 @@ export const useRepository = defineStore("repository", () => {
   const path = ref<string | null>(null);
 
   function setPath(newPath: string) {
+    console.log("setRepositoryPath", newPath);
     path.value = newPath;
   }
 

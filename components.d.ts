@@ -10,6 +10,7 @@ declare module 'vue' {
     Button: typeof import('primevue/button')['default']
     Failure: typeof import('./src/components/Failure.vue')['default']
     Greet: typeof import('./src/components/Greet.vue')['default']
+    Menu: typeof import('primevue/menu')['default']
     Message: typeof import('primevue/message')['default']
     ProjectsLayout: typeof import('./src/components/layouts/ProjectsLayout.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

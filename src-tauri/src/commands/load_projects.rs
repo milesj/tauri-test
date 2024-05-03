@@ -52,7 +52,11 @@ fn load_packages_from_workspaces(
             let entry = entry.map_err(|error| error.to_string())?;
 
             if entry.file_type().is_file() {
-                packages.insert(entry.path().to_owned(), load_json_file(entry.path())?);
+                // Includes trailing package.json, so remove it
+                packages.insert(
+                    entry.path().parent().unwrap().to_owned(),
+                    load_json_file(entry.path())?,
+                );
             }
         }
     }
@@ -63,8 +67,9 @@ fn load_packages_from_workspaces(
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ProjectsOutput {
+    root: PathBuf,
     root_package: PackageJson,
-    packages: HashMap<PathBuf, PackageJson>,
+    packages: Option<HashMap<PathBuf, PackageJson>>,
     workspaces: Option<Vec<String>>,
 }
 
@@ -82,7 +87,12 @@ pub fn load_projects(repository_path: PathBuf) -> Result<ProjectsOutput, String>
 
     Ok(ProjectsOutput {
         workspaces,
+        root: repository_path,
         root_package,
-        packages,
+        packages: if packages.is_empty() {
+            None
+        } else {
+            Some(packages)
+        },
     })
 }
