@@ -7,7 +7,9 @@ import { useProjects } from '#app/stores/projects';
 import type { PackageJson } from "type-fest";
 import { MenuItem } from 'primevue/menuitem';
 import type { Project } from "@moonrepo/types";
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const repository = useRepository();
 const projectsStore = useProjects();
 const loading = ref(true);
@@ -37,8 +39,9 @@ onMounted(() => {
 function getMenuItems(): MenuItem[] {
 	const items =  Object.values(projectsStore.projects).map((project: Project) => ({
 		label: project.id,
-		command: () => {
-			console.log(project);
+		command() {
+			console.log(`/project/${project.id}`);
+			router.push(`/project/${project.id}`);
 		},
 	}));
 

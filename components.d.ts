@@ -8,6 +8,8 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Button: typeof import('primevue/button')['default']
+    Column: typeof import('primevue/column')['default']
+    DataTable: typeof import('primevue/datatable')['default']
     Failure: typeof import('./src/components/Failure.vue')['default']
     Greet: typeof import('./src/components/Greet.vue')['default']
     Menu: typeof import('primevue/menu')['default']
