@@ -40,8 +40,7 @@ function getMenuItems(): MenuItem[] {
 	const items =  Object.values(projectsStore.projects).map((project: Project) => ({
 		label: project.id,
 		command() {
-			console.log(`/project/${project.id}`);
-			router.push(`/project/${project.id}`);
+			router.push({ name: 'project', params: { id: project.id } });
 		},
 	}));
 

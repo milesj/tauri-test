@@ -27,7 +27,35 @@
       },
       "shell": {
         "all": false,
-        "open": true
+        "execute": true,
+        "open": true,
+        "scope": [
+          {
+            "name": "bun",
+            "cmd": "bun",
+            "args": true
+          },
+          {
+            "name": "node",
+            "cmd": "node",
+            "args": true
+          },
+          {
+            "name": "npm",
+            "cmd": "npm",
+            "args": true
+          },
+          {
+            "name": "pnpm",
+            "cmd": "pnpm",
+            "args": true
+          },
+          {
+            "name": "yarn",
+            "cmd": "yarn",
+            "args": true
+          }
+        ]
       }
     },
     "windows": [

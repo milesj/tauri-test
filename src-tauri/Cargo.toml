@@ -17,6 +17,7 @@ tauri = { version = "1", features = [
 	"dialog-open",
 	"fs-all",
 	"path-all",
+	"shell-execute",
 	"shell-open",
 	"tracing",
 ] }

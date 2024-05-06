@@ -109,9 +109,10 @@ function createTaskFromScript(
     type,
     // @ts-expect-error We don't need all fields
     options: {},
-    // @ts-expect-error We don't need this
     metadata: {
       localOnly: local,
+      // @ts-expect-error Custom field
+      originalScript: scriptCommand,
     },
   };
 }
@@ -159,13 +160,15 @@ export const useProjects = defineStore("projects", () => {
   function setProjectsFromPackages(data: Record<string, PackageJson>) {
     console.log("setProjectsFromPackages", data);
 
-    projects.value = Object.fromEntries(
-      Object.entries(data)
-        .filter(([, pkg]) => pkg.name !== undefined)
-        .map(([pkgPath, pkg]) => [
-          pkg.name!,
-          createProjectFromPackage(pkg, pkgPath),
-        ])
+    setProjects(
+      Object.fromEntries(
+        Object.entries(data)
+          .filter(([, pkg]) => pkg.name !== undefined)
+          .map(([pkgPath, pkg]) => [
+            pkg.name!,
+            createProjectFromPackage(pkg, pkgPath),
+          ])
+      )
     );
   }
 

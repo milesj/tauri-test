@@ -5,10 +5,27 @@ import * as path from '@tauri-apps/api/path';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useRepository } from '#app/stores/repository';
+import type { NodePackageManager } from '@moonrepo/types';
 
 const router = useRouter();
 const repository = useRepository();
 const error = ref<Error | string | null>(null);
+
+async function determinePackageManager(dir: string): Promise<NodePackageManager> {
+	if (await fs.exists(`${dir}/bun.lockb`, { dir: fs.Dir.Home })) {
+		return 'bun';
+	}
+
+	if (await fs.exists(`${dir}/yarn.lock`, { dir: fs.Dir.Home })) {
+		return 'yarn';
+	}
+
+	if (await fs.exists(`${dir}/pnpm-lock.yaml`, { dir: fs.Dir.Home })) {
+		return 'pnpm';
+	}
+
+	return 'npm';
+}
 
 async function browse() {
 	const homeDir = await path.homeDir(); // Has a trailing slash
@@ -26,7 +43,9 @@ async function browse() {
 		throw new Error('Directory must be a Git repository (.git not found)');
 	}
 
+	repository.setPackageManager(await determinePackageManager(selectedDir));
 	repository.setPath(selectedDir);
+
 	router.push('/dashboard');
 }
 
