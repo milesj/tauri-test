@@ -20,6 +20,9 @@ dependencies:
   ansicolor:
     specifier: ^2.0.3
     version: 2.0.3
+  chart.js:
+    specifier: ^4.4.2
+    version: 4.4.2
   pinia:
     specifier: ^2.1.7
     version: 2.1.7(typescript@5.4.5)(vue@3.4.26)
@@ -32,6 +35,9 @@ dependencies:
   vue:
     specifier: ^3.4.26
     version: 3.4.26(typescript@5.4.5)
+  vue-chartjs:
+    specifier: ^5.3.1
+    version: 5.3.1(chart.js@4.4.2)(vue@3.4.26)
   vue-router:
     specifier: ^4.3.2
     version: 4.3.2(vue@3.4.26)
@@ -325,6 +331,10 @@ packages:
 
   /@jridgewell/sourcemap-codec@1.4.15:
     resolution: {integrity: sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==}
+
+  /@kurkle/color@0.3.2:
+    resolution: {integrity: sha512-fuscdXJ9G1qb7W8VdHi+IwRqij3lBkosAm4ydQtEmbY58OzHXqQhvlxqEkoz0yssNVn38bcpRWgA9PP+OGoisw==}
+    dev: false
 
   /@moonrepo/types@1.17.2:
     resolution: {integrity: sha512-UXDVG8EAUXKWz29lBbbJWbMVpBVcDm8NXRXKblFk1dn7wAGeaceO0v6pGTnVnMR+MfyXSvDajjaLHloAxkwHMg==}
@@ -873,6 +883,13 @@ packages:
       fill-range: 7.0.1
     dev: true
 
+  /chart.js@4.4.2:
+    resolution: {integrity: sha512-6GD7iKwFpP5kbSD4MeRRRlTnQvxfQREy36uEtm1hzHzcOqwWx0YEHuspuoNlslu+nciLIB7fjjsHkUv/FzFcOg==}
+    engines: {pnpm: '>=8'}
+    dependencies:
+      '@kurkle/color': 0.3.2
+    dev: false
+
   /chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
     engines: {node: '>= 8.10.0'}
@@ -1358,6 +1375,16 @@ packages:
     optionalDependencies:
       fsevents: 2.3.3
     dev: true
+
+  /vue-chartjs@5.3.1(chart.js@4.4.2)(vue@3.4.26):
+    resolution: {integrity: sha512-rZjqcHBxKiHrBl0CIvcOlVEBwRhpWAVf6rDU3vUfa7HuSRmGtCslc0Oc8m16oAVuk0erzc1FCtH1VCriHsrz+A==}
+    peerDependencies:
+      chart.js: ^4.1.1
+      vue: ^3.0.0-0 || ^2.7.0
+    dependencies:
+      chart.js: 4.4.2
+      vue: 3.4.26(typescript@5.4.5)
+    dev: false
 
   /vue-demi@0.14.7(vue@3.4.26):
     resolution: {integrity: sha512-EOG8KXDQNwkJILkx/gPcoL/7vH+hORoBaKgGe+6W7VFMvCYJfmF2dGbvgDroVnI8LU7/kTu8mbjRZGBU1z9NTA==}
