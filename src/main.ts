@@ -1,6 +1,7 @@
 import "./styles.css";
 import "primeflex/primeflex.css";
 import "primevue/resources/themes/aura-dark-lime/theme.css";
+import "@xterm/xterm/css/xterm.css";
 import { createApp } from "vue";
 import App from "./App.vue";
 import PrimeVue from "primevue/config";

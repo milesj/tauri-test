@@ -8,6 +8,15 @@ dependencies:
   '@tauri-apps/api':
     specifier: ^1
     version: 1.5.4
+  '@xterm/addon-fit':
+    specifier: ^0.10.0
+    version: 0.10.0(@xterm/xterm@5.5.0)
+  '@xterm/addon-unicode11':
+    specifier: ^0.8.0
+    version: 0.8.0(@xterm/xterm@5.5.0)
+  '@xterm/xterm':
+    specifier: ^5.5.0
+    version: 5.5.0
   ansicolor:
     specifier: ^2.0.3
     version: 2.0.3
@@ -803,6 +812,26 @@ packages:
 
   /@vue/shared@3.4.26:
     resolution: {integrity: sha512-Fg4zwR0GNnjzodMt3KRy2AWGMKQXByl56+4HjN87soxLNU9P5xcJkstAlIeEF3cU6UYOzmJl1tV0dVPGIljCnQ==}
+
+  /@xterm/addon-fit@0.10.0(@xterm/xterm@5.5.0):
+    resolution: {integrity: sha512-UFYkDm4HUahf2lnEyHvio51TNGiLK66mqP2JoATy7hRZeXaGMRDr00JiSF7m63vR5WKATF605yEggJKsw0JpMQ==}
+    peerDependencies:
+      '@xterm/xterm': ^5.0.0
+    dependencies:
+      '@xterm/xterm': 5.5.0
+    dev: false
+
+  /@xterm/addon-unicode11@0.8.0(@xterm/xterm@5.5.0):
+    resolution: {integrity: sha512-LxinXu8SC4OmVa6FhgwsVCBZbr8WoSGzBl2+vqe8WcQ6hb1r6Gj9P99qTNdPiFPh4Ceiu2pC8xukZ6+2nnh49Q==}
+    peerDependencies:
+      '@xterm/xterm': ^5.0.0
+    dependencies:
+      '@xterm/xterm': 5.5.0
+    dev: false
+
+  /@xterm/xterm@5.5.0:
+    resolution: {integrity: sha512-hqJHYaQb5OptNunnyAnkHyM8aCjZ1MEIDTQu1iIbbTD/xops91NB5yq1ZK/dC2JDbVWtF23zUtl9JE2NqwT87A==}
+    dev: false
 
   /acorn@8.11.3:
     resolution: {integrity: sha512-Y9rRfJG5jcKOE0CLisYbojUjIrIEE7AGMzA/Sm4BslANhbS+cDMpgBdcPT91oJ7OuJ9hYJBx59RjbhxVnrF8Xg==}
