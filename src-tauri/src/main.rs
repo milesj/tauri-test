@@ -11,11 +11,13 @@ fn main() {
     tauri::Builder::default()
         .plugin(tauri_plugin_persisted_scope::init())
         .invoke_handler(tauri::generate_handler![load_projects])
-        .setup(|_| {
+        .setup(|app| {
             println!("STARTING SERVER");
 
+            let handle = app.handle();
+
             tauri::async_runtime::spawn(async move {
-                server::create_server().await;
+                server::create_server(handle).await;
             });
 
             Ok(())

@@ -54,6 +54,11 @@
             "name": "yarn",
             "cmd": "yarn",
             "args": true
+          },
+          {
+            "name": "bash",
+            "cmd": "bash",
+            "args": true
           }
         ]
       }

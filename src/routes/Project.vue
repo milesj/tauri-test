@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { useProjects } from '#app/stores/projects';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { watch } from 'vue';
 import { useRoute } from 'vue-router';
 import type { Project, Task } from "@moonrepo/types";
+import { listen } from '@tauri-apps/api/event';
 
 const route = useRoute();
 const projectsStore = useProjects();
@@ -25,6 +26,12 @@ function getTaskCommand(task: Task): string {
 
 	return line;
 }
+
+onMounted(() => {
+	listen('hello', (event) => {
+		console.log(event);
+	})
+});
 </script>
 
 <template>

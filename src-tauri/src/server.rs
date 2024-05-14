@@ -10,6 +10,7 @@ use multilink::tower::Service;
 use multilink::{ProtocolError, ServiceError, ServiceFuture, ServiceResponse};
 use serde::{Deserialize, Serialize};
 use std::task::{Context, Poll};
+use tauri::{AppHandle, Manager};
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct HelloRequest {
@@ -93,7 +94,9 @@ impl ResponseHttpConvert<TestRequest, TestResponse> for TestResponse {
 }
 
 #[derive(Clone)]
-pub struct TestService;
+pub struct TestService {
+    app_handle: AppHandle,
+}
 
 impl Service<TestRequest> for TestService {
     type Response = ServiceResponse<TestResponse>;
@@ -107,20 +110,26 @@ impl Service<TestRequest> for TestService {
     fn call(&mut self, req: TestRequest) -> Self::Future {
         dbg!("REQUEST", &req);
 
+        let handle = self.app_handle.clone();
+
         Box::pin(async move {
             Ok(match req {
                 TestRequest::Hello(request) => {
-                    ServiceResponse::Single(TestResponse::Hello(HelloResponse {
+                    let res = TestResponse::Hello(HelloResponse {
                         result: format!("Hello, {}!", request.name),
-                    }))
+                    });
+
+                    handle.emit_all("hello", res.clone()).unwrap();
+
+                    ServiceResponse::Single(res)
                 }
             })
         })
     }
 }
 
-pub async fn create_server() {
-    let service = TestService;
+pub async fn create_server(app_handle: AppHandle) {
+    let service = TestService { app_handle };
 
     let server = HttpServer::new(
         service,

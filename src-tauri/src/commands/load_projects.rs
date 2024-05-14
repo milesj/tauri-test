@@ -83,7 +83,9 @@ pub fn load_projects(repository_path: PathBuf) -> Result<ProjectsOutput, String>
 
     let root_package = load_json_file(&root_package_path)?;
     let workspaces = determine_package_workspaces(&root_package, &repository_path)?;
-    let packages = load_packages_from_workspaces(workspaces.as_deref(), &repository_path)?;
+
+    let mut packages = load_packages_from_workspaces(workspaces.as_deref(), &repository_path)?;
+    packages.insert(root_package_path, root_package.clone());
 
     Ok(ProjectsOutput {
         workspaces,
